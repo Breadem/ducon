@@ -24,6 +24,10 @@ CREATE TABLE `comment` (
   `info_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `discusser_id` int(11) DEFAULT NULL,
+  `parent_id`  int(11) DEFAULT NULL,
+  `level`  int(8) DEFAULT 0,
+  `upvotes` int(8) DEFAULT 0,
+  `downvotes` int(8) DEFAULT 0,
   `comment` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
