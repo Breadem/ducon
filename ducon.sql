@@ -129,6 +129,7 @@ CREATE TABLE `user` (
   `name` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `qq` varchar(255) DEFAULT NULL,
+  'avatar' varchar(255) DEFAULT NULL,
   `reg_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
