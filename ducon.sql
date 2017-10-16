@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
-Source Server Version : 50623
+Source Server         : localhost
+Source Server Version : 50624
 Source Host           : localhost:3306
 Source Database       : ducon
 
 Target Server Type    : MYSQL
-Target Server Version : 50623
+Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2017-09-29 11:03:46
+Date: 2017-10-16 23:02:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,17 +24,13 @@ CREATE TABLE `comment` (
   `info_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `discusser_id` int(11) DEFAULT NULL,
-  `parent_id`  int(11) DEFAULT NULL,
-  `level`  int(8) DEFAULT 0,
-  `upvotes` int(8) DEFAULT 0,
-  `downvotes` int(8) DEFAULT 0,
+  `parent_id` int(11) DEFAULT NULL,
+  `level` int(8) DEFAULT '0',
+  `upvotes` int(8) DEFAULT '0',
+  `downvotes` int(8) DEFAULT '0',
   `comment` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of comment
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for info
@@ -56,10 +52,6 @@ CREATE TABLE `info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of info
--- ----------------------------
-
--- ----------------------------
 -- Table structure for local_auth
 -- ----------------------------
 DROP TABLE IF EXISTS `local_auth`;
@@ -74,10 +66,6 @@ CREATE TABLE `local_auth` (
   KEY `FKr2dk1x2kt84b3whdedlb2slxb` (`user_id`),
   CONSTRAINT `FKr2dk1x2kt84b3whdedlb2slxb` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of local_auth
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for oauth
@@ -96,10 +84,6 @@ CREATE TABLE `oauth` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of oauth
--- ----------------------------
-
--- ----------------------------
 -- Table structure for topic
 -- ----------------------------
 DROP TABLE IF EXISTS `topic`;
@@ -115,10 +99,6 @@ CREATE TABLE `topic` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of topic
--- ----------------------------
-
--- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
@@ -128,12 +108,9 @@ CREATE TABLE `user` (
   `log_time` datetime DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
-  `qq` varchar(255) DEFAULT NULL,
+  `sex` varchar(255) DEFAULT NULL,
   `avatar` varchar(255) DEFAULT NULL,
   `reg_time` datetime DEFAULT NULL,
+  `sign` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of user
--- ----------------------------
