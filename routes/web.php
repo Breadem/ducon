@@ -18,3 +18,7 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return view('login');
 });
+
+Route::prefix('user')->group(function () {
+    Route::post('register', 'AuthController@register');
+});
