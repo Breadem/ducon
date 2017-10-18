@@ -7,7 +7,7 @@
 </head>
 <body>
 <div id="app">
-        <form method="post" style="margin-top: 5%">
+        <form @submit.prevent="submit" style="margin-top: 5%">
             {{--<form-item required label="用户名:" label-col="4" wrapper-col="12" has-icon tips="我是提示" tips-mode="popup">--}}
                 {{--<v-input type="text" placeholder="请输入您的用户名" v-model="user.username" required required-tips="用户名为必填项"></v-input>--}}
             {{--</form-item>--}}
@@ -38,6 +38,7 @@
             <at-input v-model="user.pwd" type="password" placeholder="密码" :status="status.pwd"></at-input>
             <at-input v-model="user.confirm_pwd" type="password" placeholder="确认密码" :status="status.confirm_pwd"></at-input>
             <at-input v-model="user.mail" placeholder="邮箱" :status="status.mail"></at-input>
+            <at-button type="info" hollow>注册</at-button>
         </form>
 </div>
 <!-- 先引入 Vue -->
@@ -93,9 +94,17 @@
                 }
             },
             'user.pwd': function (val, oldval){
+                //
+                if(Object.is(val, this.user.confirm_pwd)){
+                    this.status.confirm_pwd = 'success'
+                }else if(this.user.confirm_pwd.length > 0){
+                    this.status.confirm_pwd = 'error'
+                }
+                //
                 if(val.length >= 6){
                     this.status.pwd = 'success'
-                }else{
+                }
+                else{
                     this.status.pwd = 'error'
                 }
             },
