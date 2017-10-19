@@ -26,6 +26,8 @@ class User extends Model
         'id','reg_time'
     ];
 
+    public $timestamps = false;
+
     public function local_auth()
     {
         return $this->hasOne('App\LocalAuth','user_id','id');

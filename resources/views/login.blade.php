@@ -68,11 +68,11 @@
         },
         methods: {
             submit: function () {
-                var formData = JSON.stringify(this.user);
+                //var formData = JSON.stringify(this.user);
                 axios({
                     method: 'post',
                     url: '/user/register',
-                    data: formData,
+                    data: this.user,
                 })
                     .then(function (response) {
                         if (response.data.code == 301) {
@@ -109,7 +109,7 @@
                 }
             },
             'user.confirm_pwd': function (val, oldval){
-                if(Object.is(val, this.user.pwd)){
+                if(Object.is(val, this.user.pwd) && val.length >= 6){
                     this.status.confirm_pwd = 'success'
                 }else{
                     this.status.confirm_pwd = 'error'

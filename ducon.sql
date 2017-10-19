@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50624
+Source Server         : localhost_3306
+Source Server Version : 50623
 Source Host           : localhost:3306
 Source Database       : ducon
 
 Target Server Type    : MYSQL
-Target Server Version : 50624
+Target Server Version : 50623
 File Encoding         : 65001
 
-Date: 2017-10-16 23:02:04
+Date: 2017-10-19 13:23:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -56,31 +56,27 @@ CREATE TABLE `info` (
 -- ----------------------------
 DROP TABLE IF EXISTS `local_auth`;
 CREATE TABLE `local_auth` (
-  `id` varchar(255) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
-  `user_id` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKr2dk1x2kt84b3whdedlb2slxb` (`user_id`),
-  CONSTRAINT `FKr2dk1x2kt84b3whdedlb2slxb` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `user_id` int(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for oauth
 -- ----------------------------
 DROP TABLE IF EXISTS `oauth`;
 CREATE TABLE `oauth` (
-  `id` varchar(255) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `oauth_access_token` varchar(255) DEFAULT NULL,
   `oauth_expires` varchar(255) DEFAULT NULL,
   `oauth_id` varchar(255) DEFAULT NULL,
   `oauth_name` varchar(255) DEFAULT NULL,
-  `user_id` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK7a23c0j3h2lvkrqjy7hkpx4hi` (`user_id`),
-  CONSTRAINT `FK7a23c0j3h2lvkrqjy7hkpx4hi` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -103,14 +99,13 @@ CREATE TABLE `topic` (
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `id` varchar(255) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL,
   `log_time` datetime DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
-  `sex` varchar(255) DEFAULT NULL,
+  `qq` varchar(255) DEFAULT NULL,
   `avatar` varchar(255) DEFAULT NULL,
   `reg_time` datetime DEFAULT NULL,
-  `sign` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
