@@ -34,10 +34,10 @@
                 {{--<v-button @click.native="submit" primary style="margin-right:10px">确定</v-button><v-button type="reset" tertiary value="重置条件"></v-button>--}}
             {{--</form-item>--}}
 
-            <at-input v-model="user.name" placeholder="用户名" :status="status.name"></at-input>
-            <at-input v-model="user.pwd" type="password" placeholder="密码" :status="status.pwd"></at-input>
-            <at-input v-model="user.confirm_pwd" type="password" placeholder="确认密码" :status="status.confirm_pwd"></at-input>
-            <at-input v-model="user.mail" placeholder="邮箱" :status="status.mail"></at-input>
+            <at-input v-model="user.uname" placeholder="用户名" :status="status.name"></at-input>
+            <at-input v-model="user.upwd" type="password" placeholder="密码" :status="status.pwd"></at-input>
+            <at-input v-model="user.uconfirm_pwd" type="password" placeholder="确认密码" :status="status.confirm_pwd"></at-input>
+            <at-input v-model="user.umail" placeholder="邮箱" :status="status.mail"></at-input>
             <at-button type="info" hollow>注册</at-button>
         </form>
 </div>
@@ -51,17 +51,17 @@
         el:'#app',
         data: {
             user: {
-                name: '',
-                pwd: '',
-                confirm_pwd: '',
-                mail: '',
+                uname: '',
+                upwd: '',
+                uconfirm_pwd: '',
+                umail: '',
             },
             status: {
                 name: '',
                 pwd: '',
                 confirm_pwd: '',
                 mail: '',
-            }
+            },
         },
         components: {
 
@@ -69,35 +69,45 @@
         methods: {
             submit: function () {
                 //var formData = JSON.stringify(this.user);
-                axios({
-                    method: 'post',
-                    url: '/user/register',
-                    data: this.user,
-                })
-                    .then(function (response) {
-                        if (response.data.code == 301) {
-                            window.location.href = response.data.url
-                        }
-                        console.log('error --- ' + response);
+                let { name, pwd, confirm_pwd, mail } = this.status;
+                let { uname, upwd, uconfirm_pwd, umail } = this.user;
+                if(name == 'error' || pwd == 'error' || confirm_pwd == 'error' || mail == 'error'){
+                    alert('输入有误，请检查后重新输入')
+                    return;
+                }else if(uname == "" || upwd == "" || uconfirm_pwd == "" || umail == ""){
+                    alert('输入不能为空')
+                }
+                else{
+                    axios({
+                        method: 'post',
+                        url: '/user/register',
+                        data: this.user,
                     })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                        .then(function (response) {
+                            if (response.data.code == 301) {
+                                window.location.href = response.data.url
+                            }
+                            console.log('error --- ' + response);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
             },
         },
         watch: {
-            'user.name': function (val, oldval){
+            'user.uname': function (val, oldval){
                 if(/^[a-zA-Z0-9_-]{4,16}$/.test(val)){
                     this.status.name = 'success'
                 }else{
                     this.status.name = 'error'
                 }
             },
-            'user.pwd': function (val, oldval){
+            'user.upwd': function (val, oldval){
                 //
-                if(Object.is(val, this.user.confirm_pwd)){
+                if(Object.is(val, this.user.uconfirm_pwd)){
                     this.status.confirm_pwd = 'success'
-                }else if(this.user.confirm_pwd.length > 0){
+                }else if(this.user.uconfirm_pwd.length > 0){
                     this.status.confirm_pwd = 'error'
                 }
                 //
@@ -108,14 +118,14 @@
                     this.status.pwd = 'error'
                 }
             },
-            'user.confirm_pwd': function (val, oldval){
-                if(Object.is(val, this.user.pwd) && val.length >= 6){
+            'user.uconfirm_pwd': function (val, oldval){
+                if(Object.is(val, this.user.upwd) && val.length >= 6){
                     this.status.confirm_pwd = 'success'
                 }else{
                     this.status.confirm_pwd = 'error'
                 }
             },
-            'user.mail': function (val, oldval) {
+            'user.umail': function (val, oldval) {
                 if(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(val)){
                     this.status.mail = 'success'
                 }else{
