@@ -84,8 +84,12 @@
                         data: this.user,
                     })
                         .then(function (response) {
-                            if (response.data.code == 301) {
-                                window.location.href = response.data.url
+                            if (response.data.code == 200) {
+                                alert('成功！')
+                            }else if (response.data.code == 451) {
+                                alert('服务器内部错误，输入不能为空！')
+                            }else if (response.data.code == 452) {
+                                alert('服务器内部错误，验证错误！')
                             }
                             console.log('error --- ' + response);
                         })

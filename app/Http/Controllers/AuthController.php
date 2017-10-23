@@ -10,23 +10,49 @@ use League\Flysystem\Adapter\Local;
 
 class AuthController extends Controller
 {
+
+    //判断是否是正确的邮箱格式;
+    public function isEmail($email){
+        $mode = '/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/';
+        if(preg_match($mode,$email)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     //
     public function register (Request $request)
     {
-        $user = User::create([
-            'name' => $request->get('uname'),
-            'email' => $request->get('umail'),
-        ]);
-        $local_auth = LocalAuth::create([
-            'username' => $request->get('uname'),
-            'password' => Hash::make($request->get('upwd')),
-            'email' => $request->get('umail'),
-            'phone' => '',
-            'user_id' => $user->id,
-            //'phone', 'email', 'password', 'username', 'user_id'
-        ]);
-        return response()->json([
-            'code' => 404,
-        ]);
+        $uname = $request->get('uname');
+        $upwd = $request->get('upwd');
+        $uconfirm_pwd = $request->get('uconfirm_pwd');
+        $umail = $request->get('umail');
+
+        if(empty($uname) || empty($upwd) || empty($umail)){
+            return response()->json([
+                'code' => 451,
+            ]);
+        }else if($upwd != $uconfirm_pwd || !$this->isEmail($umail) || strlen($uname) < 6 || strlen($upwd) < 6){
+            return response()->json([
+                'code' => 452,
+            ]);
+        }else{
+            $user = User::create([
+                'name' => $uname,
+                'email' => $umail,
+            ]);
+            $local_auth = LocalAuth::create([
+                'username' => $uname,
+                'password' => Hash::make($upwd),
+                'email' => $umail,
+                'phone' => '',
+                'user_id' => $user->id,
+                //'phone', 'email', 'password', 'username', 'user_id'
+            ]);
+            return response()->json([
+                'code' => 200,
+            ]);
+        }
     }
 }
