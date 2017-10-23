@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\LocalAuth;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use League\Flysystem\Adapter\Local;
 
@@ -53,6 +54,18 @@ class AuthController extends Controller
             return response()->json([
                 'code' => 200,
             ]);
+        }
+    }
+
+    public function login(Request $request)
+    {
+        $uname = $request->get('uname');
+        $upwd = $request->get('upwd');
+        $validName = (Auth::attempt(['username' => $uname, 'password' => $upwd]));
+        $validMail = (Auth::attempt(['email' => $uname, 'password' => $upwd]));
+        var_dump($validName);
+        if($validName || $validMail){
+            dd('---');
         }
     }
 }

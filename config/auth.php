@@ -38,12 +38,12 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'local_auth',
         ],
 
         'api' => [
             'driver' => 'token',
-            'provider' => 'users',
+            'provider' => 'local_auth',
         ],
     ],
 
@@ -65,9 +65,9 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'local_auth' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\LocalAuth::class,
         ],
 
         // 'users' => [

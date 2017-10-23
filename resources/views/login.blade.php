@@ -7,39 +7,11 @@
 </head>
 <body>
 <div id="app">
-        <form @submit.prevent="submit" style="margin-top: 5%">
-            {{--<form-item required label="用户名:" label-col="4" wrapper-col="12" has-icon tips="我是提示" tips-mode="popup">--}}
-                {{--<v-input type="text" placeholder="请输入您的用户名" v-model="user.username" required required-tips="用户名为必填项"></v-input>--}}
-            {{--</form-item>--}}
-            {{--<form-item required label="密码:" label-col="4" wrapper-col="12" has-icon tips="我是提示">--}}
-                {{--<v-input type="password" placeholder="请输入您的密码" v-model="user.pwd"></v-input>--}}
-            {{--</form-item>--}}
-            {{--<form-item required label="确认密码:" label-col="4" wrapper-col="12" has-icon tips="我是提示">--}}
-                {{--<v-input type="password" placeholder="请确认您的密码" v-model="user.confirm_pwd"></v-input>--}}
-            {{--</form-item>--}}
-            {{--<form-item required label="电话:" label-col="4" wrapper-col="12" has-icon :valid-status="phoneValidResult.isPhoneValid.validStatus" :tips="phoneValidResult.isPhoneValid.tips">--}}
-                {{--<v-input type="text" placeholder="请输入您的电话号码" :rules="phoneValidRule" :valid-result="phoneValidResult" v-model="user.tel"></v-input>--}}
-            {{--</form-item>--}}
-            {{--<form-item required label="邮箱:" label-col="4" wrapper-col="12" has-icon tips="我是提示">--}}
-                {{--<v-input type="text" placeholder="请输入您的邮箱" v-model="user.mail"></v-input>--}}
-            {{--</form-item>--}}
-            {{--<form-item required label="性别:" label-col="4" wrapper-col="12">--}}
-                {{--<label><input type="radio" value="男" v-model="user.gender" checked />男</label>--}}
-                {{--<label><input type="radio" value="女" v-model="user.gender" />女</label>--}}
-            {{--</form-item>--}}
-            {{--<form-item required label="个性签名" label-col="4" wrapper-col="12" tips-mode="popup" description-width="500" description-space="500">--}}
-                {{--<v-input type="text" v-model="user.sign"></v-input>--}}
-            {{--</form-item>--}}
-            {{--<form-item label-col="4" wrapper-col="12">--}}
-                {{--<v-button @click.native="submit" primary style="margin-right:10px">确定</v-button><v-button type="reset" tertiary value="重置条件"></v-button>--}}
-            {{--</form-item>--}}
-
-            <at-input v-model="user.uname" placeholder="用户名" :status="status.name"></at-input>
-            <at-input v-model="user.upwd" type="password" placeholder="密码" :status="status.pwd"></at-input>
-            <at-input v-model="user.uconfirm_pwd" type="password" placeholder="确认密码" :status="status.confirm_pwd"></at-input>
-            <at-input v-model="user.umail" placeholder="邮箱" :status="status.mail"></at-input>
-            <at-button type="info" hollow>注册</at-button>
-        </form>
+    <form @submit.prevent="submit" style="margin-top: 5%">
+        <at-input v-model="user.uname" placeholder="用户名或邮箱" :status="status.name"></at-input>
+        <at-input v-model="user.upwd" type="password" placeholder="密码" :status="status.pwd"></at-input>
+        <at-button type="info" hollow>登录</at-button>
+    </form>
 </div>
 <!-- 先引入 Vue -->
 <script src="{{ url('/js/vue.js') }}"></script>
@@ -53,15 +25,17 @@
             user: {
                 uname: '',
                 upwd: '',
-                uconfirm_pwd: '',
-                umail: '',
             },
             status: {
                 name: '',
                 pwd: '',
-                confirm_pwd: '',
-                mail: '',
             },
+        },
+        mounted: function() {
+            axios.defaults.headers.common = {
+                'X-CSRF-TOKEN': window.Laravel.csrfToken,
+                'X-Requested-With': 'XMLHttpRequest'
+            };
         },
         components: {
 
@@ -69,18 +43,18 @@
         methods: {
             submit: function () {
                 //var formData = JSON.stringify(this.user);
-                let { name, pwd, confirm_pwd, mail } = this.status;
-                let { uname, upwd, uconfirm_pwd, umail } = this.user;
-                if(name == 'error' || pwd == 'error' || confirm_pwd == 'error' || mail == 'error'){
+                let { name, pwd } = this.status;
+                let { uname, upwd } = this.user;
+                if(name == 'error' || pwd == 'error'){
                     alert('输入有误，请检查后重新输入')
                     return;
-                }else if(uname == "" || upwd == "" || uconfirm_pwd == "" || umail == ""){
+                }else if(uname == "" || upwd == ""){
                     alert('输入不能为空')
                 }
                 else{
                     axios({
                         method: 'post',
-                        url: '/user/register',
+                        url: '/user/login',
                         data: this.user,
                     })
                         .then(function (response) {
@@ -120,20 +94,6 @@
                 }
                 else{
                     this.status.pwd = 'error'
-                }
-            },
-            'user.uconfirm_pwd': function (val, oldval){
-                if(Object.is(val, this.user.upwd) && val.length >= 6){
-                    this.status.confirm_pwd = 'success'
-                }else{
-                    this.status.confirm_pwd = 'error'
-                }
-            },
-            'user.umail': function (val, oldval) {
-                if(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(val)){
-                    this.status.mail = 'success'
-                }else{
-                    this.status.mail = 'error'
                 }
             }
         }
