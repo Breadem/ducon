@@ -7,6 +7,9 @@
 </head>
 <body>
 <div id="app">
+    @if (session('status'))
+            {{ session('status') }}
+    @endif
     <form style="margin-top: 5%" action="{{ url('/user/login') }}" method="post">
         {{ csrf_field() }}
         <at-input name="uname" placeholder="用户名或邮箱"></at-input>

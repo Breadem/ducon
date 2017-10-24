@@ -62,6 +62,8 @@ class AuthController extends Controller
         var_dump($validName);
         if($validName || $validMail){
             return redirect()->intended('/');
+        }else{
+            return redirect('/login')->with('status', '用户名或密码错误，请重新输入！');
         }
     }
 }

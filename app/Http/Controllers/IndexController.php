@@ -14,8 +14,9 @@ class IndexController extends Controller
             $local_auth = Auth::user();
             $user = LocalAuth::where('user_id', $local_auth->user_id)->first()->user;
             echo($user->name);
+        }else{
+            echo('已退出登录');
         }
-        echo('已退出登录');
         return view('index');
     }
 
