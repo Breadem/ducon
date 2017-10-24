@@ -90,6 +90,8 @@
                                 alert('服务器内部错误，输入不能为空！')
                             }else if (response.data.code == 452) {
                                 alert('服务器内部错误，验证错误！')
+                            }else if (response.data.code == 453) {
+                                alert('用户名已存在，请重新输入！')
                             }
                             console.log('error --- ' + response);
                         })

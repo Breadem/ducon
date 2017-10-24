@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'IndexController@index');
+
+Route::get('/exits', 'IndexController@exits');
 
 Route::get('/register', function () {
     return view('register');

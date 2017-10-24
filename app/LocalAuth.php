@@ -12,7 +12,7 @@ class LocalAuth extends Authenticatable
     protected $table = 'local_auth';
 
     protected $fillable = [
-        'phone', 'email', 'password', 'username', 'user_id'
+        'phone', 'email', 'password', 'username', 'remember_token', 'user_id'
     ];
 
     protected $hidden = [

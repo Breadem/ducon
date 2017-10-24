@@ -67,7 +67,7 @@ return [
     'providers' => [
         'local_auth' => [
             'driver' => 'eloquent',
-            'model' => App\LocalAuth::class,
+            'model' => \App\LocalAuth::class,
         ],
 
         // 'users' => [

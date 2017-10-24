@@ -4,24 +4,13 @@ namespace App\Http\Controllers;
 
 use App\LocalAuth;
 use App\User;
+use function foo\func;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use League\Flysystem\Adapter\Local;
 
 class AuthController extends Controller
 {
-
-    //判断是否是正确的邮箱格式;
-    public function isEmail($email){
-        $mode = '/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/';
-        if(preg_match($mode,$email)){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
     //
     public function register (Request $request)
     {
@@ -30,13 +19,20 @@ class AuthController extends Controller
         $uconfirm_pwd = $request->get('uconfirm_pwd');
         $umail = $request->get('umail');
 
+        //username is exists?
+        $boo_name = LocalAuth::where('username', $uname)->exists();
+
         if(empty($uname) || empty($upwd) || empty($umail)){
             return response()->json([
                 'code' => 451,
             ]);
-        }else if($upwd != $uconfirm_pwd || !$this->isEmail($umail) || strlen($uname) < 6 || strlen($upwd) < 6){
+        }else if($upwd != $uconfirm_pwd || !\MailValid::isEmail($umail) || strlen($uname) < 6 || strlen($upwd) < 6){
             return response()->json([
                 'code' => 452,
+            ]);
+        }else if($boo_name){
+            return response()->json([
+                'code' => 453,
             ]);
         }else{
             $user = User::create([
@@ -65,7 +61,7 @@ class AuthController extends Controller
         $validMail = (Auth::attempt(['email' => $uname, 'password' => $upwd]));
         var_dump($validName);
         if($validName || $validMail){
-            dd('---');
+            return redirect()->intended('/');
         }
     }
 }

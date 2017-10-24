@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50623
 File Encoding         : 65001
 
-Date: 2017-10-19 13:23:53
+Date: 2017-10-24 11:14:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -61,9 +61,10 @@ CREATE TABLE `local_auth` (
   `password` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
+  `remember_token` varchar(255) DEFAULT NULL,
   `user_id` int(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for oauth
@@ -108,4 +109,4 @@ CREATE TABLE `user` (
   `avatar` varchar(255) DEFAULT NULL,
   `reg_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
