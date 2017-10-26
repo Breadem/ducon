@@ -14,8 +14,9 @@ class User extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'phone','log_time',
+        'name', 'email', 'phone','log_time','reg_time'
     ];
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -23,7 +24,7 @@ class User extends Model
      * @var array
      */
     protected $hidden = [
-        'id','reg_time'
+        'id'
     ];
 
     public $timestamps = false;
