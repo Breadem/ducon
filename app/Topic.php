@@ -17,4 +17,6 @@ class Topic extends Model
     {
     	return $this->hasMany('App\Info','topic_id','id');
     }
+
+    public $timestamps  = false;
 }	
