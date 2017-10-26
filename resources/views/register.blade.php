@@ -86,6 +86,7 @@
                         .then(function (response) {
                             if (response.data.code == 200) {
                                 alert('成功！')
+                                window.location.href = response.data.url
                             }else if (response.data.code == 451) {
                                 alert('服务器内部错误，输入不能为空！')
                             }else if (response.data.code == 452) {

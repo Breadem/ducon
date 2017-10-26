@@ -8,6 +8,7 @@ use function foo\func;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -36,7 +37,7 @@ class AuthController extends Controller
                 'code' => 453,
             ]);
         }else{
-            $user = User::create([
+            $userId = DB::table('user')->insertGetId([
                 'name' => $uname,
                 'email' => $umail,
                 'reg_time' =>  Carbon::now()->toDateTimeString(),
@@ -46,11 +47,12 @@ class AuthController extends Controller
                 'password' => Hash::make($upwd),
                 'email' => $umail,
                 'phone' => '',
-                'user_id' => $user->id,
+                'user_id' => $userId,
                 //'phone', 'email', 'password', 'username', 'user_id'
             ]);
             return response()->json([
                 'code' => 200,
+                'url' => url('/login')
             ]);
         }
     }
