@@ -28,7 +28,6 @@ class InfoController extends Controller
                 'content' => $request->get('content'),
                 'user_id' => Auth::id(),
                 'topic_id' => '1',
-                //'phone', 'email', 'password', 'username', 'user_id'
         ]);
 
         return redirect()->intended('/');

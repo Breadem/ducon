@@ -37,7 +37,7 @@ CREATE TABLE `comment` (
 -- ----------------------------
 DROP TABLE IF EXISTS `info`;
 CREATE TABLE `info` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `brief` varchar(255) DEFAULT NULL,
   `content` varchar(255) DEFAULT NULL,
@@ -85,7 +85,7 @@ CREATE TABLE `oauth` (
 -- ----------------------------
 DROP TABLE IF EXISTS `topic`;
 CREATE TABLE `topic` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `head_img` varchar(255) DEFAULT NULL,
   `back_img` varchar(255) DEFAULT NULL,
