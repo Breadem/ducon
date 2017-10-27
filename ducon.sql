@@ -20,7 +20,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `info_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `discusser_id` int(11) DEFAULT NULL,
