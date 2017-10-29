@@ -24,6 +24,7 @@ Route::get('/login', function () {
 });
 
 Route::prefix('bbs')->group(function () {
+    // info 帖子路由
     Route::get('/', 'InfoController@index');
     Route::get('/info/create', function () {
     	return view('info/create');

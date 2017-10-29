@@ -13,7 +13,7 @@
      <div style="width:100%;height:100%;">
         <div style="margin:0 auto;width:50%">
             <h2>{{ $info->title }}</h2>
-            <p>{{ $info->ctime }} by <a href="#">User</a></p>
+            <p>{{ $info->ctime->toFormattedDateString() }} by <a href="#">User</a></p>
             <p>{{$info->content}}</p>
          </div>
     </div>

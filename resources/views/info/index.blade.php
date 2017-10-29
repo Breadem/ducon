@@ -15,7 +15,7 @@
         <h2>标题:</h2>
         <h2><a href="./bbs/info/{{ $info->id }}">{{ $info->title }}</a></h2>
         <p>发表日期:</p>
-        <p>{{ $info->ctime }}</p>
+        <p>{{ $info->ctime->toFormattedDateString() }}</p>
         <at-button type="error" size="small" hollow>删除</at-button>
         <at-button type="primary" size="small" hollow><a href="./bbs/info/{{ $info->id}}/edit">修改</a></at-button>
     </div>

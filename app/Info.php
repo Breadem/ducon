@@ -14,6 +14,8 @@ class Info extends Model
         'title', 'brief', 'content','img','read_count','like_count',
         'user_id','comment_id','topic_id',
     ];
+     protected $dates = ['ctime',];
+
 
     public function topic()
     {
