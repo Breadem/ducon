@@ -42,7 +42,7 @@
                 var self = this
                     axios({
                         method: 'post',
-                        url: '/bbs/info/create',
+                        url: '/api/bbs/info/create',
                         data: {
                             'title': this.title,
                             'content': this.content,

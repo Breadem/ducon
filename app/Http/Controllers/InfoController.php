@@ -48,7 +48,7 @@ class InfoController extends Controller
         $info = Info::find($id);
         $info->title = $request->input('title');
         $info->content = $request->input('content');
-        $info->save(); 
+        $info->save();
         return response()->json([
             'code' => 200,
             'url' => url('/bbs')
