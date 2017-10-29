@@ -25,16 +25,15 @@ Route::get('/login', function () {
 
 Route::prefix('bbs')->group(function () {
     Route::get('/', 'InfoController@index');
-    Route::get('/create', function () {
+    Route::get('/info/create', function () {
     	return view('info/create');
     });
-    Route::get('/{id}', 'InfoController@infoDetail');
-});
-
-Route::prefix('info')->group(function () {
-    Route::get('/', 'InfoController@index');
-    Route::post('/create', 'InfoController@save');
-    Route::post('/{id}', 'InfoController@infoDetail');
+    Route::post('/info/create', 'InfoController@save');
+    Route::get('/info/{info}/edit',function (App\Info $info) {
+        return view('info/edit',['info'=>$info]);
+    });
+    Route::post('/info/{id}/update','InfoController@update');
+    Route::get('/info/{id}', 'InfoController@infoDetail');
 });
 
 Route::prefix('user')->group(function () {

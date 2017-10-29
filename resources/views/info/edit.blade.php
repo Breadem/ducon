@@ -12,7 +12,7 @@
     @endif
     <form style="margin-top: 5%" @submit.prevent="submit">
         {{ csrf_field() }}
-        <at-input v-model="title" name="title" placeholder="标题"></at-input>
+        <at-input v-model="title" name="title" value="{{$info->title}}" placeholder="标题"></at-input>
         <at-textarea v-model="content" name="content" min-rows="2" max-rows="4" placeholder="这里输入内容，请输入多行"></at-textarea>
         <at-alert v-if="errors.hasOwnProperty('title')" :message="errors.title.toString()" type="error"></at-alert>
         <at-alert v-if="errors.hasOwnProperty('content')" :message="errors.content.toString()" type="error"></at-alert>
@@ -26,11 +26,12 @@
 <script src="{{ url('/js/at.min.js') }}"></script>
 <script src="{{ url('/js/axios.min.js') }}"></script>
 <script type="application/javascript">
+    var json = @json($info);
     new Vue({
         el: '#app',
         data: {
-            title:'',
-            content: '',
+            title:json.title,
+            content: json.content,
             errors: [],
         },
         components: {
@@ -39,10 +40,11 @@
         methods: {
             
             submit: function () {
+                var info_id = json.id;
                 var self = this
                     axios({
                         method: 'post',
-                        url: '/bbs/info/create',
+                        url: '/bbs/info/'+info_id+'/update',
                         data: {
                             'title': this.title,
                             'content': this.content,
@@ -50,7 +52,7 @@
                     })
                     .then(function (response) {
                         if (response.data.code == 200) {
-                           self.$Notify.success({ title: '文章', message: '发表成功！' })
+                           self.$Notify.success({ title: '文章', message: '修改成功！' })
                             window.location.href = response.data.url
                         }
                     })
