@@ -39,5 +39,5 @@ Route::prefix('bbs')->group(function () {
 
 Route::prefix('user')->group(function () {
     Route::post('register', 'AuthController@register');
-    Route::post('login', 'AuthController@login');
+    Route::post('login', 'AuthController@login')->middleware('throttle:5,1');
 });
