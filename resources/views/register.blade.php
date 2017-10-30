@@ -49,7 +49,7 @@
                 var these = this
                     axios({
                         method: 'post',
-                        url: '/api/user/register',
+                        url: '/user/register',
                         data: this.user,
                     })
                     .then(function (response) {

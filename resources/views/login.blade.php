@@ -10,7 +10,7 @@
     @if (session('status'))
             {{ session('status') }}
     @endif
-    <form style="margin-top: 5%" action="{{ url('/api/user/login') }}" method="post">
+    <form style="margin-top: 5%" action="{{ url('/user/login') }}" method="post">
         {{ csrf_field() }}
         <at-input name="username" placeholder="用户名或邮箱"></at-input>
         <at-input name="password" type="password" placeholder="密码"></at-input>

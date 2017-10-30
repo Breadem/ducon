@@ -33,4 +33,12 @@ Route::prefix('bbs')->group(function () {
         return view('info/edit',['info'=>$info]);
     });
     Route::get('/info/{id}', 'InfoController@infoDetail');
+    Route::post('/info/create', 'InfoController@save');
+    Route::post('/info/{id}/update','InfoController@update');
 });
+
+Route::prefix('user')->group(function () {
+    Route::post('register', 'AuthController@register');
+    Route::post('login', 'AuthController@login')->middleware('throttle:5,1');
+});
+

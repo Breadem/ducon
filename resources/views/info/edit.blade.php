@@ -44,7 +44,7 @@
                 var self = this
                     axios({
                         method: 'post',
-                        url: '/api/bbs/info/'+info_id+'/update',
+                        url: '/bbs/info/'+info_id+'/update',
                         data: {
                             'title': this.title,
                             'content': this.content,
