@@ -31,7 +31,7 @@ Route::prefix('bbs')->group(function () {
     });
     Route::get('/info/{info}/edit',function (App\Info $info) {
         return view('info/edit',['info'=>$info]);
-    });
+    })->middleware('can:update,info');
     Route::get('/info/{id}', 'InfoController@infoDetail');
     Route::post('/info/create', 'InfoController@save');
     Route::post('/info/{id}/update','InfoController@update');
@@ -39,6 +39,6 @@ Route::prefix('bbs')->group(function () {
 
 Route::prefix('user')->group(function () {
     Route::post('register', 'AuthController@register');
-    Route::post('login', 'AuthController@login')->middleware('throttle:5,1');
+    Route::post('login', 'AuthController@login')->middleware('throttle:5');
 });
 
