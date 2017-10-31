@@ -27,7 +27,9 @@ Route::prefix('bbs')->group(function () {
     // info 帖子路由
     Route::get('/', 'InfoController@index');
     Route::get('/info/create', function () {
-    	return view('info/create');
+        if(\Illuminate\Support\Facades\Auth::check()){
+            return view('info/create');
+        }abort(401);
     });
     Route::get('/info/{info}/edit',function (App\Info $info) {
         return view('info/edit',['info'=>$info]);

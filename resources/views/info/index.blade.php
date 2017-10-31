@@ -17,7 +17,7 @@
         <p>发表日期:</p>
         <p>{{ $info->ctime->toFormattedDateString() }}</p>
         <at-button type="error" size="small" hollow>删除</at-button>
-        <at-button type="primary" size="small" hollow><a href="./bbs/info/{{ $info->id}}/edit">修改</a></at-button>
+        <at-button type="primary" size="small" hollow><a href="{{ url("/bbs/info/".$info->id."/edit") }}">修改</a></at-button>
     </div>
     @empty
         <p>没有帖子</p>
