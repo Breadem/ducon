@@ -28,7 +28,7 @@ class InfoController extends Controller
         $infoId = DB::table('info')->insertGetId([
                 'title' => $request->get('title'),
                 'content' => $request->get('content'),
-                'user_id' => Auth::id(),
+                'user_id' => Auth::user()->user->id,
                 'topic_id' => '1',
                 'ctime' =>  Carbon::now()->toDateTimeString(),
         ]);
@@ -36,6 +36,15 @@ class InfoController extends Controller
         return response()->json([
             'code' => 200,
             'url' => url('/bbs')
+        ]);
+    }
+
+    public function delete(Request $request, $id)
+    {   
+        $info = Info::find($id);
+        $info->delete();
+        return response()->json([
+            'code' => 200
         ]);
     }
 

@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Info;
 use App\LocalAuth;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class InfoPolicy
 {
@@ -20,7 +21,7 @@ class InfoPolicy
     public function view( $user, Info $info)
     {
         //
-        $user = LocalAuth::where('user_id', $user->user_id)->first()->user;
+        $user = Auth::user()->user;
         return $user->id === $info->user_id;
     }
 
@@ -45,7 +46,7 @@ class InfoPolicy
     public function update( $user, Info $info)
     {
         //
-        $user = LocalAuth::where('user_id', $user->user_id)->first()->user;
+        $user = Auth::user()->user;
         return $user->id === $info->user_id;
     }
 
@@ -59,7 +60,7 @@ class InfoPolicy
     public function delete( $user, Info $info)
     {
         //
-        $user = LocalAuth::where('user_id', $user->user_id)->first()->user;
+        $user = Auth::user()->user;
         return $user->id === $info->user_id;
     }
 }
