@@ -13,7 +13,7 @@ class User extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'phone','log_time'
+        'name', 'email', 'phone', 'role', 'log_time'
     ];
 
 
@@ -36,5 +36,15 @@ class User extends Model
     public function comment()
     {
         return $this->hasMany('App\Comment');
+    }
+
+    /**
+     * @return bool
+     * 判断用户权限
+     */
+
+    public function isSuperAdmin()
+    {
+        return $this->role == 1;
     }
 }

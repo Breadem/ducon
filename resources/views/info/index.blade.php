@@ -16,7 +16,7 @@
         <p>发表日期:</p>
         <p>@{{ value.ctime}} </p>
         <at-button type="error" size="small" v-on:click="deleteInfo(index,value.id)" hollow>删除</at-button>
-        <at-button type="primary" size="small" hollow><a :href="'./info/' + value.id + '/edit'">修改</a></at-button>
+        <at-button type="primary" size="small" hollow><a :href="'./bbs/info/' + value.id + '/edit'">修改</a></at-button>
     </div>
      <!--    <p>没有帖子</p> -->
    
