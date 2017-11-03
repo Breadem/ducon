@@ -37,7 +37,7 @@ Route::prefix('bbs')->group(function () {
     Route::get('/info/{id}', 'InfoController@infoDetail');
     Route::post('/info/create', 'InfoController@save');
     Route::post('/info/{id}/update','InfoController@update');
-    Route::post('/info/{id}/delete','InfoController@delete');
+    Route::post('/info/{id}/delete','InfoController@delete')->middleware('can:delete,info');
 });
 
 Route::prefix('user')->group(function () {
