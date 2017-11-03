@@ -12,6 +12,17 @@ class InfoPolicy
     use HandlesAuthorization;
 
     /**
+     * @return bool
+     */
+    public function before()
+    {
+        $user = Auth::user()->user;
+        if ($user->isSuperAdmin()){
+            return true;
+        }
+    }
+
+    /**
      * Determine whether the user can view the info.
      *
      * @param  \  $user

@@ -17,7 +17,6 @@ class InfoController extends Controller
         return view('info.index',['infos'=>$infos]);
     }
 
-
     public function save(Request $request)
     {
         $this->validate($request, [
