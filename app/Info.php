@@ -22,9 +22,14 @@ class Info extends Model
     	return $this->belongsTo('App\Topic');
     }
 
-    public function comment()
+    public function comments()
     {
     	return $this->hasMany('App\Comment');
+    }
+
+    public function getComments()
+    {
+        return $this->comments->with('user')->get()->groupBy('parent_id');
     }
 
 }

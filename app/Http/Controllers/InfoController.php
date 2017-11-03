@@ -70,5 +70,4 @@ class InfoController extends Controller
         return view('info.show',['info'=>$info]);
     }
 
-    
 }

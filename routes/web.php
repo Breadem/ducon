@@ -32,12 +32,19 @@ Route::prefix('bbs')->group(function () {
         }abort(401);
     });
     Route::get('/info/{info}/edit',function (App\Info $info) {
-        return view('info/edit',['info'=>$info]);
+        $info->load('comments.user');
+        $comments = $info->getComments();
+        $comments['root'] = $comments[''];
+        unset($comments['']);
+        return view('info/edit',compact('info','comments'));
     })->middleware('can:update,info');
     Route::get('/info/{id}', 'InfoController@infoDetail');
     Route::post('/info/create', 'InfoController@save');
     Route::post('/info/{id}/update','InfoController@update');
     Route::post('/info/{id}/delete','InfoController@delete')->middleware('can:delete,info');
+
+    // comment
+    Route::post('/info/{id}/comment','CommentController@save');
 });
 
 Route::prefix('user')->group(function () {

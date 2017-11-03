@@ -12,7 +12,7 @@
     @endif
     <div class="row" v-for="(value, index) in infos">
         <h2>标题:</h2>
-        <h2><a :href="'./bbs/info/' + value.id ">@{{ value.title }}</a></h2>
+        <h2><a :href="'./info/' + value.id ">@{{ value.title }}</a></h2>
         <p>发表日期:</p>
         <p>@{{ value.ctime}} </p>
         <at-button type="error" size="small" v-on:click="deleteInfo(index,value.id)" hollow>删除</at-button>
